@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/lab5.fs</file>
+        <file>shaders/lab5.vs</file>
+    </qresource>
+</RCC>
