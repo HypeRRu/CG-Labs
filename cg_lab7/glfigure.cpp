@@ -125,13 +125,17 @@ void GLFigure::calculatePolygons()
         std::cerr << "[error] can't generate polygons: base circles is empty" << std::endl;
         return;
     }
+    /* recalculate inverse transposed matrix */
+    inverseTransposedModel_ = rotation_ * translation_ * scale_;
+    inverseTransposedModel_ = inverseTransposedModel_.inverted();
+    inverseTransposedModel_ = inverseTransposedModel_.transposed();
     /* prepare data */
     generateCircles();
     generateNorms();
     generateIndices();
     /* load data to buffer */
     vertexObject_.bind_vao();
-    vertexObject_.loadVertices(vertices_, indices_);
+    vertexObject_.loadVertices(vertices_, indices_);    
     /* set dirty to false */
     dirty_ = false;
 }
@@ -255,7 +259,7 @@ void GLFigure::generateNorms()
         for (GLuint j = 0; j < circleSegmentsCount - 1; ++j)
         {
             /* norms has to be rotated, translated and scaled like vertices */
-            norm4 = translation_ * rotation_ * scale_ * QVector4D(
+            norm4 = inverseTransposedModel_ * QVector4D(
                 QVector3D::normal(
                     vertices_.at((i + 0) * circleSegmentsCount + j + 0).first, // 0 vertex position
                     vertices_.at((i + 0) * circleSegmentsCount + j + 1).first, // right vertex position

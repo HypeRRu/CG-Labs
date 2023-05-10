@@ -88,7 +88,6 @@ void GLScene::paintGL()
     glLineWidth(1.0f);
     /* set scene transformations */
     figureShaderProgram_->setUniformValue("model", modelMatrix_);
-    figureShaderProgram_->setUniformValue("inverseTransposedModel", modelMatrix_.inverted().transposed());
     figureShaderProgram_->setUniformValue("view", camera_.getView());
     figureShaderProgram_->setUniformValue("projection", projectionMatrix_);
     /* set scene lighting params */
@@ -117,16 +116,15 @@ void GLScene::paintGL()
     /* draw light source */
     lightSourceShaderProgram_->bind();
     lightSourceShaderProgram_->setUniformValue("model", modelMatrix_);
-    lightSourceShaderProgram_->setUniformValue("inverseTransposedModel", modelMatrix_.inverted().transposed());
     lightSourceShaderProgram_->setUniformValue("view", camera_.getView());
     lightSourceShaderProgram_->setUniformValue("projection", projectionMatrix_);
     lightSourceShaderProgram_->setUniformValue("cameraPos", camera_.getPosition());
     if (lighting_.getType() != GLLightingType::Directional)
     {
         lightSource_->setTranslation(
-            lighting_.getPosition().x(),
-            lighting_.getPosition().y(),
-            lighting_.getPosition().z()
+            -lighting_.getPosition().x(),
+            -lighting_.getPosition().y(),
+            -lighting_.getPosition().z()
         );
         lighting_.apply(lightSourceShaderProgram_);
         lightSource_->draw(this, fragmentationFactor_);

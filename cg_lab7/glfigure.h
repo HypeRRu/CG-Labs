@@ -88,6 +88,8 @@ private:
     QMatrix4x4 scale_;
     ///! @brief figure translation matrix
     QMatrix4x4 translation_;
+    ///! @brief inverse transposed model matrix
+    QMatrix4x4 inverseTransposedModel_;
     ///! @brief figure material info
     GLMaterial material_;
 };
