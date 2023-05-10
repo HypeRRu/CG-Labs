@@ -32,7 +32,7 @@ public:
     ///! @brief set camera projection type
     void setProjectionType(GLProjectionType type);
 
-    inline GLShaderProgram* getShaderProgram() { return figureShaderProgram_; }
+    inline GLShaderProgram* getFigureShaderProgram() { return figureShaderProgram_; }
     inline GLLighting& getLighting() { return lighting_; }
     inline QVector<std::shared_ptr<GLFigure>>& getFigures() { return figures_; }
     inline std::shared_ptr<GLFigure> getFigure(ssize_t index) { return figures_.at(index); }

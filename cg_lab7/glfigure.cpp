@@ -61,7 +61,7 @@ void GLFigure::draw(GLScene* painter, GLuint fragmentation)
         setAttributeInfo(painter);
     }
     /* apply material */
-    material_.apply(painter->getShaderProgram());
+    material_.apply(painter->getFigureShaderProgram());
     /* draw polygons */
     glDrawElements(GL_TRIANGLES, indicesCount_, GL_UNSIGNED_INT, nullptr);
     vertexObject_.unbind_vao();

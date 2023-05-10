@@ -131,6 +131,7 @@ void MainWindow::on_positionX_valueChanged(double)
         static_cast<float>(ui->positionY->value()),
         static_cast<float>(ui->positionZ->value())
     });
+    ui->glWindow->update();
 }
 
 
@@ -141,6 +142,7 @@ void MainWindow::on_positionY_valueChanged(double)
         static_cast<float>(ui->positionY->value()),
         static_cast<float>(ui->positionZ->value())
     });
+    ui->glWindow->update();
 }
 
 
@@ -151,6 +153,7 @@ void MainWindow::on_positionZ_valueChanged(double)
         static_cast<float>(ui->positionY->value()),
         static_cast<float>(ui->positionZ->value())
     });
+    ui->glWindow->update();
 }
 
 
@@ -161,6 +164,7 @@ void MainWindow::on_directionX_valueChanged(double)
         static_cast<float>(ui->directionY->value()),
         static_cast<float>(ui->directionZ->value())
     });
+    ui->glWindow->update();
 }
 
 
@@ -171,6 +175,7 @@ void MainWindow::on_directionY_valueChanged(double)
         static_cast<float>(ui->directionY->value()),
         static_cast<float>(ui->directionZ->value())
     });
+    ui->glWindow->update();
 }
 
 
@@ -181,18 +186,21 @@ void MainWindow::on_directionZ_valueChanged(double)
         static_cast<float>(ui->directionY->value()),
         static_cast<float>(ui->directionZ->value())
     });
+    ui->glWindow->update();
 }
 
 
 void MainWindow::on_cutoffSelector_valueChanged(double)
 {
     ui->glWindow->getLighting().setCutOff(static_cast<float>(ui->cutoffSelector->value()));
+    ui->glWindow->update();
 }
 
 
 void MainWindow::on_outerCutoffSelector_valueChanged(double)
 {
     ui->glWindow->getLighting().setOuterCutOff(static_cast<float>(ui->outerCutoffSelector->value()));
+    ui->glWindow->update();
 }
 
 
@@ -210,6 +218,7 @@ void MainWindow::on_lightAmbientSelector_clicked()
 
         ui->lightAmbientSelector->setIcon(QIcon(pixmap));
     }
+    ui->glWindow->update();
 }
 
 
@@ -227,6 +236,7 @@ void MainWindow::on_lightDiffuseSelector_clicked()
 
         ui->lightDiffuseSelector->setIcon(QIcon(pixmap));
     }
+    ui->glWindow->update();
 }
 
 
@@ -244,6 +254,7 @@ void MainWindow::on_lightSpecularSelector_clicked()
 
         ui->lightSpecularSelector->setIcon(QIcon(pixmap));
     }
+    ui->glWindow->update();
 }
 
 
@@ -251,6 +262,7 @@ void MainWindow::on_shininessSelector_valueChanged(double arg1)
 {
     std::shared_ptr<GLFigure> figure = ui->glWindow->getFigure(ui->figureSelector->value() - 1);
     figure->getMaterial().setShininess(static_cast<float>(arg1));
+    ui->glWindow->update();
 }
 
 
@@ -258,12 +270,14 @@ void MainWindow::on_ambientStrengthSelector_valueChanged(double arg1)
 {
     std::shared_ptr<GLFigure> figure = ui->glWindow->getFigure(ui->figureSelector->value() - 1);
     figure->getMaterial().setAmbientStrength(static_cast<float>(arg1));
+    ui->glWindow->update();
 }
 
 
 void MainWindow::on_figureSelector_valueChanged(int)
 {
     loadFigureMaterial();
+    ui->glWindow->update();
 }
 
 
@@ -281,6 +295,7 @@ void MainWindow::on_materialDiffuseSelector_clicked()
 
         ui->materialDiffuseSelector->setIcon(QIcon(pixmap));
     }
+    ui->glWindow->update();
 }
 
 
@@ -298,6 +313,7 @@ void MainWindow::on_materialSpecularSelector_clicked()
 
         ui->materialSpecularSelector->setIcon(QIcon(pixmap));
     }
+    ui->glWindow->update();
 }
 
 
